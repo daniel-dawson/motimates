@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :preferences
   resources :communities
   resources :goals
   get 'users/show'
