@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :communities
   resources :goals
   get 'users/show'
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
