@@ -4,6 +4,7 @@ class CreatePreferences < ActiveRecord::Migration[5.2]
       t.integer :min_age
       t.integer :max_age
       t.string :gender
+      t.string :location
 
       t.timestamps
     end
