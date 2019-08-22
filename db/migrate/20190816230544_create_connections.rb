@@ -2,7 +2,7 @@ class CreateConnections < ActiveRecord::Migration[5.2]
   def change
     create_table :connections do |t|
       t.text :note
-      t.references :users, index: true, foreign_key: true
+      t.references :user, index: true, foreign_key: true
       t.references :connected_user, index: true
       t.boolean :pending, default: true
 

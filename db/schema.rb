@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_09_190126) do
+ActiveRecord::Schema.define(version: 2019_08_22_160715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,50 @@ ActiveRecord::Schema.define(version: 2019_08_09_190126) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "communities", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "connections", force: :cascade do |t|
+    t.text "note"
+    t.bigint "user_id"
+    t.bigint "connected_user_id"
+    t.boolean "pending", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["connected_user_id"], name: "index_connections_on_connected_user_id"
+    t.index ["user_id", "connected_user_id"], name: "index_connections_on_user_id_and_connected_user_id", unique: true
+    t.index ["user_id"], name: "index_connections_on_user_id"
+  end
+
+  create_table "goals", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "community_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "memberships", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "community_id"
+    t.index ["community_id"], name: "index_memberships_on_community_id"
+    t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
+  create_table "preferences", force: :cascade do |t|
+    t.integer "min_age"
+    t.integer "max_age"
+    t.string "gender"
+    t.string "location"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -60,4 +104,6 @@ ActiveRecord::Schema.define(version: 2019_08_09_190126) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "connections", "users"
+  add_foreign_key "connections", "users", column: "connected_user_id"
 end
