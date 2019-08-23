@@ -22,6 +22,7 @@ class Connection < ApplicationRecord
   end
 
   def accept_connection_request
+    self.accept_inverse
     self.update(pending: false)
   end
 
