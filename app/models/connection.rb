@@ -3,21 +3,21 @@ class Connection < ApplicationRecord
   belongs_to :connected_user, class_name: 'User' #, inverse_of: :connections
 
   after_create :create_inverse, unless: :has_inverse?
-  after_destroy :destroy_inverses, if: :has_inverse?
+  after_destroy :destroy_inverse, if: :has_inverse?
 
   def create_inverse
     self.class.create(inverse_connection_options)
   end
 
-  def destroy_inverses
-    inverses.destroy_all
+  def destroy_inverse
+    inverse.destroy
   end
 
   def has_inverse?
     self.class.exists?(inverse_connection_options)
   end
 
-  def inverses
+  def inverse
     self.class.where(inverse_connection_options)
   end
 
