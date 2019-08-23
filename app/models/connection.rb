@@ -21,6 +21,16 @@ class Connection < ApplicationRecord
     self.class.where(inverse_connection_options)
   end
 
+  def accept_connection_request
+    self.update(pending: false)
+  end
+
+  def accept_inverse
+    self.inverse.update(pending: false)
+  end
+
+  private
+
   def inverse_connection_options
     { connected_user_id: user_id, user_id: connected_user_id }
   end
