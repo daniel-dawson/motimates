@@ -10,22 +10,44 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <% if user_signed_in? %>
-      Signed in as
-      <%= current_user.email %>. Not you?
-      <%= link_to "Edit profile", edit_user_registration_path %>
-      <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-    <% else %>
-      <%= link_to "Sign up", new_user_registration_path %>
-      or
-      <%= link_to "sign in", new_user_session_path %>
-    <% end %>
+    <div class="ui huge menu">
+      <a class="active item">
+        Home
+      </a>
+      <div class="ui dropdown item">
+        Browse
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <a class="item">Goals</a>
+          <a class="item">Communities</a>
+          <a class="item">Motimates</a>
+        </div>
+      </div>
+      <div class="right menu">
+        <div class="item">
+          <% if !user_signed_in? %>
+            <%= button_to new_user_registration_path, {class: "ui animated fade button"} do %>
+            <div class="visible content">Sign-up</div>
+            <div class="hidden content">
+              BITCH
+            </div>
+          <% end %>
+          <%= button_to new_user_session_path, {class: "ui animated fade button"} do %>
+          <div class="visible content">Log In</div>
+          <div class="hidden content">
+            PLZ
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
 
-    <% flash.each do |name, msg| %>
-      <%= content_tag :div, msg, id: "flash_#{name}" %>
-    <% end %>
-    <%= yield %>
-  </body>
+<% flash.each do |name, msg| %>
+  <%= content_tag :div, msg, id: "flash_#{name}" %>
+<% end %>
+<%= yield %>
+</body>
 </html>
