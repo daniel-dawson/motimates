@@ -1,3 +1,7 @@
 /*******************************
      User Global Variables
 *******************************/
+
+@moti-pink: #FF3185;
+@moti-blue: #1A87B3;
+@moti-cream: #FFECC9;
