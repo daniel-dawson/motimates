@@ -10,8 +10,9 @@
   </head>
 
   <body>
-    <div class="ui large fixed menu">
-      <a class=" active item">
+    <nav class="ui large teal inverted borderless fixed menu">
+      <a href="" class="ui item"><%= image_tag "motimates_logo.png", :alt => "Motimates logo", :class => "ui mini middle aligned image" %></a>
+      <a class="active item">
         Home
       </a>
       <div class="ui simple dropdown item">
@@ -23,31 +24,19 @@
           <a class="item">Motimates</a>
         </div>
       </div>
-      <div class="right menu">
+        <% unless user_signed_in? %>
+          <%= link_to "Sign up", new_user_registration_path, :class => "right item" %>
+          <%= link_to "Log In", new_user_session_path, :class => "item" %>
+        <% else %>
+          <%= link_to "Sign out", destroy_user_session_path, :method => :delete, :class => "right item" %>
+        <% end %>
+    </nav>
+    <div class="ui main container">
 
-        <% if !user_signed_in? %>
-          <div class="link item">
-            <%= link_to "Sign up", new_user_registration_path %>
-            <!-- <div class="visible content">Sign-up</div> -->
-            <!-- <div class="hidden content">
-              BITCH
-            </div> -->
-        </div>
-        <div class="item">
-          <%= link_to "Log In", new_user_session_path %>
-      </div>
-    <% else %>
-      <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-    <% end %>
-
-  </div>
-</div>
-<div class="ui main container">
-
-  <% flash.each do |name, msg| %>
-    <%= content_tag :div, msg, id: "flash_#{name}" %>
-  <% end %>
-  <%= yield %>
-</div>
-</body>
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, id: "flash_#{name}" %>
+      <% end %>
+      <%= yield %>
+    </div>
+  </body>
 </html>
