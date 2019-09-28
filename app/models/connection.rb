@@ -5,6 +5,10 @@ class Connection < ApplicationRecord
   after_create :create_inverse, unless: :has_inverse?
   after_destroy :destroy_inverse, if: :has_inverse?
 
+  enum status: {
+
+  }
+
   def create_inverse
     self.class.create(inverse_connection_options)
   end
