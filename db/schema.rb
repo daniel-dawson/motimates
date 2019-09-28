@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_23_184534) do
+ActiveRecord::Schema.define(version: 2019_09_28_084728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,17 +43,8 @@ ActiveRecord::Schema.define(version: 2019_08_23_184534) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "connections", force: :cascade do |t|
-    t.text "note"
-    t.bigint "user_id"
-    t.bigint "connected_user_id"
-    t.boolean "pending", default: true
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["connected_user_id"], name: "index_connections_on_connected_user_id"
-    t.index ["user_id", "connected_user_id"], name: "index_connections_on_user_id_and_connected_user_id", unique: true
-    t.index ["user_id"], name: "index_connections_on_user_id"
-  end
+# Could not dump table "connections" because of following StandardError
+#   Unknown type 'connection_status' for column 'status'
 
   create_table "goals", force: :cascade do |t|
     t.string "name"
@@ -82,6 +73,7 @@ ActiveRecord::Schema.define(version: 2019_08_23_184534) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "name"
     t.integer "age"
     t.string "gender"
     t.datetime "birthday"
@@ -105,6 +97,4 @@ ActiveRecord::Schema.define(version: 2019_08_23_184534) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "connections", "users"
-  add_foreign_key "connections", "users", column: "connected_user_id"
 end
