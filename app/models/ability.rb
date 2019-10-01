@@ -4,9 +4,12 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    user ||= User.new
+    can :read, [User, Community]
     if user.present?
-      can :manage, User, id: user.id
-      can :manage, [Goal, Preference, Connection], user_id: user.id
+      can [:destroy, :update], User, id: user.id
+      can [:read, :update], Preference, user_id: user.id
+      can :manage, [Goal, Connection], user_id: user.id
     end
     # Define abilities for the passed in user here. For example:
     #

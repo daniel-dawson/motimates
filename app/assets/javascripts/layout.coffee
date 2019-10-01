@@ -8,6 +8,9 @@
 $ ->
   $('#flash').on 'click', ->
     $('#flash').addClass('hidden')
+  setTimeout (->
+    $('#flash').addClass('hidden')
+    ), 3000
 
 
 $(document).on 'turbolinks:load', ->
