@@ -19,10 +19,6 @@ class User < ApplicationRecord
             through: :connections,
             source: :motimate
 
-
-  # has_many :inverse_connections, class_name: 'Connection', foreign_key: 'connected_user_id', inverse_of: :user
-  # has_many :inverse_connected_users, through: :inverse_connections, source: :user, dependent: :destroy
-
   has_many :memberships
   has_many :communities, through: :memberships
   has_many :goals, through: :communities
