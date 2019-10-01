@@ -12,16 +12,18 @@
   <body>
     <nav class="ui large teal inverted borderless fixed menu">
       <a href="/" class="ui item"><%= image_tag "motimates_logo.png", :alt => "Motimates logo", :class => "ui mini middle aligned image" %></a>
-      <a class="item">
-        Home
-      </a>
+      <% if user_signed_in? %>
+        <%= link_to "Home", user_path(current_user), :class => "item" %>
+      <% end %>
       <div class="ui simple dropdown item">
         <span class="text">Browse</span>
         <i class="dropdown icon"></i>
         <div class="menu">
-          <a class="item">Goals</a>
-          <a class="item">Communities</a>
-          <a class="item">Motimates</a>
+          <% if user_signed_in? %>
+            <%= link_to "Motimates", user_connections_path(current_user), :class => "item" %>
+            <%= link_to "Goals", user_goals_path(current_user), :class => "item" %>
+          <% end %>
+          <%= link_to "Communitites", communities_path, :class => "item" %>
         </div>
       </div>
         <% unless user_signed_in? %>
