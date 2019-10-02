@@ -12,13 +12,13 @@ class Connection < ApplicationRecord
   validates :motimate_id, presence: true
 
   # Check if connection exists(whether pending or not)
-  def self.connection?(user, motimate)
+  def self.connected?(user, motimate)
     !find_by(user_id: user.id, motimate_id: motimate.id).nil?
   end
 
   # Request a connection from user to (potential) motimate
   def self.request(user, motimate)
-    unless user == motimate or Connection.connection?(user, motimate)
+    unless user == motimate or Connection.connected?(user, motimate)
       transaction do # Insures integrity of database
         create(user_id: user.id, motimate_id: motimate.id, status: 'pending')
         create(user_id: motimate.id, motimate_id: user.id, status: 'requested')
@@ -38,8 +38,8 @@ class Connection < ApplicationRecord
   # Delete a connection or cancel a pending request
   def self.breakup(user, motimate)
     transaction do
-      destroy(find_by(user_id: user.id, motimate_id: motimate.id))
-      destroy(find_by(motimate_id: motimate.id, user_id: user.id))
+      destroy(find_by(user_id: user.id, motimate_id: motimate.id).id)
+      destroy(find_by(motimate_id: user.id, user_id: motimate.id).id)
     end
   end
 
