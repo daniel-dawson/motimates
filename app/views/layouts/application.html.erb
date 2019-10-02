@@ -30,7 +30,13 @@
           <%= link_to "Sign up", new_user_registration_path, :class => "right item" %>
           <%= link_to "Log In", new_user_session_path, :class => "item" %>
         <% else %>
-          <%= link_to "Sign out", destroy_user_session_path, :method => :delete, :class => "right item" %>
+          <%= link_to user_path(current_user), :class => "right item" do %>
+            <i class="large icons">
+              <i class="users icon"></i>
+              <i class="bottom right corner pink circle icon"></i>
+            </i>
+          <% end %>
+          <%= link_to "Sign out", destroy_user_session_path, :method => :delete, :class => "item" %>
         <% end %>
     </nav>
     <div class="ui main container">
