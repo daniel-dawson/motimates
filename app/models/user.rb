@@ -10,11 +10,11 @@ class User < ApplicationRecord
   has_many :motimates,
             -> { where(connections: { status: "accepted" }).order(:name) },
             through: :connections
-  has_many :requested_motimates,
+  has_many :motimate_requests,
             -> { where(connections: { status: "requested" }).order(:created_at) },
             through: :connections,
             source: :motimate
-  has_many :pending_motimates,
+  has_many :motimates_pending,
             -> { where(connections: { status: "pending" }).order(:created_at) },
             through: :connections,
             source: :motimate
