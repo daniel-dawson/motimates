@@ -1,3 +1,10 @@
 <% flash.each do |name, msg| %>
-  <%= content_tag :div, msg, id: "flash", class: flash_class_name(name) %>
+  <%= content_tag :div, msg, class: "flash " << flash_class_name(name) %>
+<% end %>
+<% if resource && resource.errors.any? %>
+  <%= content_tag :div, class: "flash " << flash_class_name("alert") do %>
+    <% resource.errors.full_messages.each do |msg| %>
+      <%= content_tag :p, msg %>
+    <% end %>
+  <% end %>
 <% end %>
