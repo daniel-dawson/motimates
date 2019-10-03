@@ -94,6 +94,8 @@ GEM
       railties (>= 3.2, < 6.1)
     erubi (1.8.0)
     execjs (2.7.0)
+    fast_jsonapi (1.5)
+      activesupport (>= 4.2)
     ffi (1.11.1)
     ffi (1.11.1-java)
     ffi (1.11.1-x64-mingw32)
@@ -266,6 +268,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   dotenv-rails
+  fast_jsonapi
   jbuilder (~> 2.5)
   jquery-rails
   less-rails-semantic_ui
