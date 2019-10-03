@@ -11,9 +11,10 @@
       <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
     </div>
 
+    <div class="field">
       <%= f.label :password %><br/>
       <%= f.password_field :password, autocomplete: "current-password", class: "field error" %>
-
+    </div>
 
     <% if devise_mapping.rememberable? %>
       <div class="inline field">
