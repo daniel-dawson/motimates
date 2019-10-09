@@ -7,7 +7,11 @@ Rails.application.routes.draw do
     resources :preferences, except: [:index]
   end
 
+  resources :users, only: :index
+
   resources :communities
+
+  post '/motimates', to: 'connections#accept', as: :accept
 
   root 'welcome#home'
 end
