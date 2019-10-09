@@ -1,2 +1,42 @@
 <h1>Users#show for <%= @user %> <%= @user.name.humanize %></h1>
 <p>Find me in app/views/users/show.html.erb</p>
+
+<% if @user == current_user %>
+  <%= link_to "edit profile", edit_user_registration_path %>
+<% elsif user_signed_in? && !Connection.connected?(current_user, @user) %>
+  <%= link_to "add motimate", user_connections_path(current_user.id, motimate_id: @user.id), method: :post %>
+<% end %>
+
+<h2>Motimtates</h2>
+<div id="motimates">
+  <ul>
+    <% @user.motimates.each do |motimate| %>
+      <li><%= link_to motimate.name.humanize, user_path(motimate) %>, since <%= motimate.connections.where(motimate_id: @user.id)[0].accepted_at %></li>
+    <% end %>
+  </ul>
+</div>
+
+<% if @user == current_user %>
+  <h2>Motimate requests</h2>
+  <div id="motimate-requests">
+    <ul>
+      <% @user.motimate_requests.each do |request| %>
+        <li>
+          <%= link_to request.name.humanize, user_path(request) %>, since <%= request.connections.where(motimate_id: @user.id)[0].created_at %>
+          <%= link_to "accept", accept_path(user_id: current_user, motimate_id: request), method: :post %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <h2>Pending requests</h2>
+  <div id="motimates-pending">
+    <ul>
+      <% @user.motimates_pending.each do |pending| %>
+        <li>
+          <%= link_to pending.name.humanize, user_path(pending) %>, since <%= pending.connections.where(motimate_id: @user.id)[0].created_at %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
