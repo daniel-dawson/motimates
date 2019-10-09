@@ -20,7 +20,7 @@
         <i class="dropdown icon"></i>
         <div class="menu">
           <% if user_signed_in? %>
-            <%= link_to "Motimates", user_connections_path(current_user), :class => "item" %>
+            <%= link_to "Motimates", users_path, :class => "item" %>
             <%= link_to "Goals", user_goals_path(current_user), :class => "item" %>
           <% end %>
           <%= link_to "Communitites", communities_path, :class => "item" %>
