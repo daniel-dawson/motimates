@@ -9,7 +9,7 @@ class Ability
     if user.present?
       can [:destroy, :update], User, id: user.id
       can [:read, :update], Preference, user_id: user.id
-      can :manage, [Goal, Connection], user_id: user.id
+      can :manage, [Goal], user_id: user.id
     end
     # Define abilities for the passed in user here. For example:
     #
