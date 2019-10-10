@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :users, only: :index
 
-  resources :communities
+  resources :communities, only: [:show, :index]
 
   post '/motimates', to: 'connections#accept', as: :accept
 
