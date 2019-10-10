@@ -1,5 +1,19 @@
-<h1>Users#show for <%= @user %> <%= @user.name.humanize %></h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<h1>Users#show for <%= @user.name.humanize %></h1>
+
+<h2>Goals</h2>
+<div id="goals">
+  <% if @user.goals.empty? %>
+    <% if @user == current_user %>
+      <p>Create your first goal <%= link_to "here", new_user_goal_path(current_user) %></p>
+    <% else %>
+      <p>This user has no goals yet.</p>
+    <% end %>
+  <% else %>
+    <%= @user.goals.each do |goal| %>
+
+    <% end %>
+  <% end %>
+</div>
 
 <% if @user == current_user %>
   <%= link_to "edit profile", edit_user_registration_path %>
