@@ -1,1 +1,7 @@
-Communities
+<h1>Communities</h1>
+
+<% @communities.all.each do |community| %>
+  <%= content_tag :div do %>
+    <%= link_to community.name, community_path(community) %>
+  <% end %>
+<% end %>
