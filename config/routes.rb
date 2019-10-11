@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :users, only: :show do
     resources :goals
+    resources :connections
     resources :preferences, except: [:index]
   end
 
