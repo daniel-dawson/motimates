@@ -1,3 +1,13 @@
 <h1><%= @community.name.humanize %> community page</h1>
 
 <h3><%= @community.description %></h3>
+
+<h4>Here are some goals people have:</h4>
+<dl class="">
+  <% @community.goals.take(5).each do |goal| %>
+    <dt><%= goal.name %></dt>
+    <dd><%= goal.description %></dd>
+    <br>
+  <% end %>
+
+</dl>
