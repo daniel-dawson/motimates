@@ -5,11 +5,13 @@
 <%= form_with model: @goal, url: user_goals_path, local: true do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
+  <br>
 
   <%= f.label :description %>
   <%= f.text_area :description %>
+  <br>
 
   <%= collection_select :goal, :community_id, Community.all, :id, :name, prompt: "Select best-fitting community" %>
-
+  <br>
   <%= f.submit %>
 <% end %>
