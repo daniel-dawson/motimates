@@ -1,4 +1,9 @@
 <h1>Users#show for <%= @user.name.humanize %></h1>
+<% if @user == current_user %>
+<%= link_to "edit profile", edit_user_registration_path %>
+<% elsif user_signed_in? && !Connection.connected?(current_user, @user) %>
+<%= link_to "add motimate", user_connections_path(current_user.id, motimate_id: @user.id), method: :post %>
+<% end %>
 
 <h2>Goals</h2>
 <div id="goals">
@@ -9,17 +14,13 @@
       <p>This user has no goals yet.</p>
     <% end %>
   <% else %>
-    <%= @user.goals.each do |goal| %>
-
+    <% @user.goals.each do |goal| %>
+      <p><%= goal.name %>: <%= goal.description %></p>
     <% end %>
+    <%= link_to "Add another goal", new_user_goal_path(current_user) %>
   <% end %>
 </div>
 
-<% if @user == current_user %>
-  <%= link_to "edit profile", edit_user_registration_path %>
-<% elsif user_signed_in? && !Connection.connected?(current_user, @user) %>
-  <%= link_to "add motimate", user_connections_path(current_user.id, motimate_id: @user.id), method: :post %>
-<% end %>
 
 <h2>Motimtates</h2>
 <div id="motimates">
