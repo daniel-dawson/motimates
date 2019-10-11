@@ -14,6 +14,7 @@ class GoalsController < ApplicationController
       flash[:message] = "Goal created"
       redirect_to user_path(@user)
     else
+      flash[:notice] = "Something went wrong"
       render :new
     end
   end
