@@ -19,8 +19,10 @@ class User < ApplicationRecord
             through: :connections,
             source: :motimate
 
-  has_many :memberships
-  has_many :communities, through: :memberships
-  has_many :goals, through: :communities
+  has_many :goals
+  has_many :communities, through: :goals
+
+  # TODO: write scope for distinct communities
+  # TODO: write scope for top 3 most involved communities
 
 end
