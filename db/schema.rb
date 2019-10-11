@@ -55,13 +55,6 @@ ActiveRecord::Schema.define(version: 2019_09_28_084728) do
     t.integer "user_id"
   end
 
-  create_table "memberships", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "community_id"
-    t.index ["community_id"], name: "index_memberships_on_community_id"
-    t.index ["user_id"], name: "index_memberships_on_user_id"
-  end
-
   create_table "preferences", force: :cascade do |t|
     t.integer "min_age"
     t.integer "max_age"
