@@ -5,7 +5,7 @@ class GoalsController < ApplicationController
   end
 
   def new
-
+    @goal.community_id = params[:community_id] if params[:community_id].present?
   end
 
   def create
@@ -18,6 +18,8 @@ class GoalsController < ApplicationController
       render :new
     end
   end
+
+  private
 
   def goal_params
     params.require(:goal).permit(:name, :description, :community_id)
