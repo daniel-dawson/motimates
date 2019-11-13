@@ -4,12 +4,8 @@ module ApplicationHelper
   end
 
   def avatar_image_tag(user, size, class_string)
-    if user.avatar.attached?
-      if user.avatar.variable?
-        image_tag(user.avatar.variant(resize: "#{size}x#{size}!"), class: "#{class_string}")
-      else
-        image_tag(gravatar_image_url(user.email, size: size), height: size, width: size, class: "#{class_string}")
-      end
+    if user.avatar.attached? && user.avatar.variable?
+      image_tag(user.avatar.variant(resize: "#{size}x#{size}!"), class: "#{class_string}")
     else
       image_tag(gravatar_image_url(user.email, size: size), height: size, width: size, class: "#{class_string}")
     end
