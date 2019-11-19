@@ -10,8 +10,13 @@ class ConnectionsController < ApplicationController
 
   def show
     c = Connection.find_by_id(params[:id])
+
     respond_to do |format|
-      format.json { render json: c }
+      format.json {
+        render json: ConnectionSerializer.new(c, {
+                 include: [:motimate, :user],
+               })
+      }
     end
   end
 
@@ -42,7 +47,11 @@ class ConnectionsController < ApplicationController
     connection = Connection.find_by(user_id: @user.id, motimate_id: @motimate.id)
     respond_to do |format|
       format.html
-      format.json { render json: connection }
+      format.json {
+        render json: ConnectionSerializer.new(connection, {
+                 include: [:motimate, :user],
+               })
+      }
     end
   end
 
