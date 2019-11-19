@@ -8,10 +8,10 @@
 
 Community.create([
   { name: "Diet",
-    description: "Work on your diet goals, including gaining weight, cutting back on certain items,
+   description: "Work on your diet goals, including gaining weight, cutting back on certain items,
                   and food sourcing." },
   { name: "Exercise",
-    description: "Goals might include going to classes x times per week, incorporating running into your routine
+   description: "Goals might include going to classes x times per week, incorporating running into your routine
                   , etc." },
   { name: "Career",
     description: "Network, discover new career paths, quit your current job, etc." },
@@ -22,5 +22,9 @@ Community.create([
   { name: "Hobby",
     description: "Dedicate more time towards a passion, pick up a new hobby, recruit others." },
   { name: "Education",
-    description: "Download a relevant learning application, do x lessons per day, go to a meetup, study x hours per week." }
-  ])
+    description: "Download a relevant learning application, do x lessons per day, go to a meetup, study x hours per week." },
+  {
+    name: "Wellness",
+    description: "Health outside of diet and exercise. Meditation, therapy, etc.",
+  },
+])
