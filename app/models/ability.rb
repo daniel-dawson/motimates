@@ -7,7 +7,7 @@ class Ability
     user ||= User.new
     can :read, [User, Community]
     if user.present?
-      can [:destroy, :update], User, id: user.id
+      can [:destroy, :update, :delete_avatar], User, id: user.id
       can [:read, :update], Preference, user_id: user.id
       can :manage, [Goal], user_id: user.id
     end
