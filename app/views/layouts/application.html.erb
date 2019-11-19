@@ -4,17 +4,12 @@
     <title>Motimates</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
     <nav class="ui large teal inverted borderless fixed menu">
       <a href="/" class="ui item"><%= image_tag "motimates_logo.png", :alt => "Motimates logo", :class => "ui mini middle aligned image" %></a>
-      <% if user_signed_in? %>
-        <%= link_to "Home", user_path(current_user), :class => "item" %>
-      <% end %>
       <div class="ui simple dropdown item">
         <span class="text">Browse</span>
         <i class="dropdown icon"></i>
@@ -26,23 +21,45 @@
           <%= link_to "Communitites", communities_path, :class => "item" %>
         </div>
       </div>
-        <% unless user_signed_in? %>
-          <%= link_to "Sign up", new_user_registration_path, :class => "right item" %>
-          <%= link_to "Log In", new_user_session_path, :class => "item" %>
-        <% else %>
-          <%= link_to user_path(current_user), :class => "right item" do %>
-            <i class="large icons">
-              <i class="users icon"></i>
-              <i class="bottom right corner pink circle icon"></i>
-            </i>
-          <% end %>
-          <%= link_to "Sign out", destroy_user_session_path, :method => :delete, :class => "item" %>
-        <% end %>
+      <% unless user_signed_in? %>
+        <%= link_to "Sign up", new_user_registration_path, :class => "right item" %>
+        <%= link_to "Log In", new_user_session_path, :class => "item" %>
+      <% else %>
+        <div class="ui right simple dropdown item">
+          <i class="large icons">
+            <i class="users icon"></i>
+            <%= content_tag(:i, '', id: "request-icon", class: "bottom right corner pink circle icon") unless current_user.motimate_requests.empty? %>
+          </i>
+          <div class="menu">
+            <%= render "layouts/motimate_requests" %>
+          </div>
+        </div>
+        <%= link_to "Profile", user_path(current_user), :class => "item" %>
+        <%= link_to "Sign out", destroy_user_session_path, :method => :delete, :class => "item" %>
+      <% end %>
     </nav>
     <div class="ui main container">
       <%= render "layouts/flash_message" %>
+      <div id="modal-container">
+        <%= render "layouts/modal" if @user && user_signed_in? %>
+      </div>
       <%= yield %>
     </div>
-    <footer>Motimates</footer>
+    <footer>
+      <div class="ui horizontal bulleted link list">
+        <a class="item">
+          Motimates
+        </a>
+        <a class="item">
+          Terms and Conditions 
+        </a>
+        <a class="item">
+          Privacy Policy
+        </a>
+        <a class="item">
+          Contact Us
+        </a>
+      </div>
+    </footer>
   </body>
 </html>
