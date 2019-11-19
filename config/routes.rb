@@ -13,5 +13,9 @@ Rails.application.routes.draw do
 
   post '/motimates', to: 'connections#accept', as: :accept
 
+  get 'connections/:id', to: 'connections#show'
+
+  delete '/users/:id/delete_avatar', to: 'users#delete_avatar', as: :delete_avatar
+
   root 'welcome#home'
 end
