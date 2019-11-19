@@ -5,6 +5,7 @@ ruby '2.6.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
+gem "rubyzip", ">= 1.3.0"
 gem 'jquery-rails'
 # Address security issues for lower versions
 gem "nokogiri", ">= 1.10.4"
