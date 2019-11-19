@@ -22,6 +22,8 @@ class User < ApplicationRecord
   has_many :goals
   has_many :communities, through: :goals
 
+  has_one_attached :avatar
+
   # TODO: write scope for distinct communities
   # TODO: write scope for top 3 most involved communities
 
