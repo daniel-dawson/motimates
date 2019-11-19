@@ -11,17 +11,21 @@ class Connection < ApplicationRecord
   validates :user_id, presence: true
   validates :motimate_id, presence: true
 
+  def self.note_for(user, motimate)
+    self.find_by(user_id: user.id, motimate_id: motimate.id).note
+  end
+
   # Check if connection exists(whether pending or not)
   def self.connected?(user, motimate)
     !find_by(user_id: user.id, motimate_id: motimate.id).nil?
   end
 
   # Request a connection from user to (potential) motimate
-  def self.request(user, motimate)
+  def self.request(user, motimate, note = "Hi! Let's be motimates :)")
     unless user == motimate or Connection.connected?(user, motimate)
       transaction do # Insures integrity of database
-        create(user_id: user.id, motimate_id: motimate.id, status: 'pending')
-        create(user_id: motimate.id, motimate_id: user.id, status: 'requested')
+        create(user_id: user.id, motimate_id: motimate.id, status: 'pending', note: note)
+        create(user_id: motimate.id, motimate_id: user.id, status: 'requested', note: note)
       end
     end
   end
