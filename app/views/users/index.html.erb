@@ -1,6 +1,8 @@
 <h1>List of motimates:</h1>
 <% @users.each do |user| %>
-  <div class="">
-    <%= link_to user.name.humanize, user_path(user) %>
-  </div>
+  <% unless user == current_user %>
+    <div class="">
+      <%= link_to user.name.humanize, user_path(user) %>
+    </div>
+  <% end %>
 <% end %>
