@@ -10,6 +10,11 @@ padding: .5em 0;
   font-size: 1.3rem;
 }
 
+.ui.menu .item > img:not(.ui) {
+  width: 2.7em;
+  margin-top: -0.2em;
+}
+
 .ui.menu .ui.dropdown .menu > .item {
   font-size: 1.1rem !important;
   font-weight: 100 !important;
@@ -17,6 +22,10 @@ padding: .5em 0;
 
 .ui.menu .ui.dropdown .menu .item {
   padding: 4.5px 15px;
+}
+
+.ui.menu .dropdown.item .menu {
+  min-width: max-content;
 }
 
 .ui.menu .item, .ui.menu .menu .item {
