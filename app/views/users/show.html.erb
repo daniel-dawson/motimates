@@ -1,10 +1,10 @@
 <h1>Users#show for <%= @user.name.humanize %></h1>
+<%= avatar_image_tag(@user, 100, "ui rounded image") %>
 <% if @user == current_user %>
-<%= link_to "edit profile", edit_user_registration_path %>
+  <%= link_to "edit profile", edit_user_registration_path %>
 <% elsif user_signed_in? && !Connection.connected?(current_user, @user) %>
-<%= link_to "add motimate", user_connections_path(current_user.id, motimate_id: @user.id), method: :post %>
+  <%= content_tag :a, "add motimate", class: "modal-link" %>
 <% end %>
-
 <h2>Goals</h2>
 <div id="goals">
   <% if @user.goals.empty? %>
@@ -20,17 +20,24 @@
     <%= link_to "Add another goal", new_user_goal_path(current_user) %>
   <% end %>
 </div>
-
-
-<h2>Motimtates</h2>
-<div id="motimates">
-  <ul>
-    <% @user.motimates.each do |motimate| %>
-      <li><%= link_to motimate.name.humanize, user_path(motimate) %>, since <%= motimate.connections.where(motimate_id: @user.id)[0].accepted_at %></li>
+<%# TODO: redo motimates list using semantic ui list module %>
+<h2>Motimates
+</h2>
+<div id="<%= "user-" if @user == current_user %>motimates">
+  <div class="ui relaxed list">
+    <% @user.motimates.take(5).each do |motimate| %>
+      <div class="item">
+        <%= avatar_image_tag(motimate, 60, "ui rounded image") %>
+        <div class="middle aligned content">
+          <a class="header"><%= link_to motimate.name, user_path(motimate) %></a>
+          <div class="description">
+            motimates since <%= motimate.connections.where(motimate_id: @user.id)[0].accepted_at %>
+          </div>
+        </div>
+      </div>
     <% end %>
-  </ul>
+  </div>
 </div>
-
 <% if @user == current_user %>
   <h2>Motimate requests</h2>
   <div id="motimate-requests">
@@ -43,7 +50,6 @@
       <% end %>
     </ul>
   </div>
-
   <h2>Pending requests</h2>
   <div id="motimates-pending">
     <ul>
