@@ -1,0 +1,33 @@
+<div class="ui comments">
+  <% if current_user.motimate_requests.empty? %>
+    <div class="comment item">
+      <div class="text">
+        You have no motimate requests
+      </div>
+
+    </div>
+  <% else %>
+    <% current_user.motimate_requests.each do |moti| %>
+      <div class="request comment item">
+        <% if moti.avatar.attached? %>
+          <% if moti.avatar.variable? %>
+            <%= image_tag(moti.avatar.variant(resize: "40x40!"), class: "avatar") %>
+          <% else %>
+            <%= image_tag(gravatar_image_url(moti.email, size: 40), height: 40, width: 40, class: "avatar") %>
+          <% end %>
+        <% else %>
+          <%= image_tag gravatar_image_url(moti.email, size: 40), height: 40, width: 40, class: "avatar" %>
+        <% end %>
+        <div class="content">
+          <%= link_to moti.name, user_path(moti), class: "author" %>
+          <div class="text connection">
+            <%= Connection.note_for(current_user, moti) %>
+          </div>
+          <div class="actions">
+            <a rel="nofollow" class="js-accept" data-user-id="<%= current_user.id %>" data-motimate-id="<%= moti.id %>">accept</a>
+            <a rel="nofollow" class="js-deny" data-user-id="<%= current_user.id %>" data-motimate-id="<%= moti.id %>">deny</a>
+
+          </div>
+        </div>
+      </div>
+      <div class="ui fitted divider"> </div> <% end %> <% end %> </div>
