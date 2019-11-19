@@ -1,0 +1,33 @@
+<div class="ui small modal">
+  <i class="close icon"></i>
+  <div class="header">
+    Motimate request
+  </div>
+  <div class="image content">
+    <div class="ui middle aligned rounded image">
+      <% if @user.avatar.attached? %>
+        <% if @user.avatar.variable? %>
+          <%= image_tag(@user.avatar.variant(resize: "400x400!")) %>
+        <% else %>
+          <%= image_tag(gravatar_image_url(@user.email, size: 400), height: 400, width: 400) %>
+        <% end %>
+      <% else %>
+        <%= image_tag gravatar_image_url(@user.email, size: 400), height: 400, width: 400 %>
+      <% end %>
+    </div>
+    <div class="description">
+      <div class="ui header">People will be more likely to add you if you leave a custom note.</div>
+      <p>Optionally write a note, then click send to complete your request.</p>
+      <%= form_with(url: user_connections_path(current_user.id, motimate_id: @user.id), id: "modal-form", class: "ui form", remote: "local") do |f| %>
+        <%= f.text_area :note, class: "field" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <div class="ui pink cancel button">
+      Cancel
+    </div>
+    <input type="submit" value="Send" form="modal-form" class="ui teal approve button">
+  </div>
+</div>
