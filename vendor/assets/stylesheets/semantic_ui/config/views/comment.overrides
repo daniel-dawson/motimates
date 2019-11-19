@@ -1,3 +1,14 @@
 /*******************************
     User Variable Overrides
 *******************************/
+
+.ui.comments .comment .text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 350px;
+  min-width: 150px;
+}
+
+.ui.comments .comment .text.js-whitespace {
+  white-space: normal;
+}
