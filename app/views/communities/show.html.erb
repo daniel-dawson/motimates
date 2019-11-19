@@ -1,7 +1,6 @@
 <h1><%= @community.name.humanize %> community page</h1>
-
 <h3><%= @community.description %></h3>
-
+<p><%= link_to "Add a goal in this community", new_user_goal_path(current_user, community_id: @community.id) %></p>
 <h4>Here are some goals people have:</h4>
 <dl class="">
   <% @community.goals.take(5).each do |goal| %>
@@ -9,5 +8,4 @@
     <dd><%= goal.description %></dd>
     <br>
   <% end %>
-
 </dl>
