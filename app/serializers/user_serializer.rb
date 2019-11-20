@@ -12,4 +12,7 @@ class UserSerializer
   attribute :default_avatar_url do |user|
     gravatar_url_for user
   end
+  link :profile_url do |user|
+    "http://localhost:3000/users/#{user.id}"
+  end
 end
