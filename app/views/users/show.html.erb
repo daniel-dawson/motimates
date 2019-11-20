@@ -20,44 +20,7 @@
     <%= link_to "Add another goal", new_user_goal_path(current_user) %>
   <% end %>
 </div>
-<%# TODO: redo motimates list using semantic ui list module %>
 <h2>Motimates
 </h2>
-<div id="<%= "user-" if @user == current_user %>motimates">
-  <div class="ui relaxed list">
-    <% @user.motimates.take(5).each do |motimate| %>
-      <div class="item">
-        <%= avatar_image_tag(motimate, 60, "ui rounded image") %>
-        <div class="middle aligned content">
-          <a class="header"><%= link_to motimate.name, user_path(motimate) %></a>
-          <div class="description">
-            motimates since <%= motimate.connections.where(motimate_id: @user.id)[0].accepted_at %>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
+<div id="<%= "user-" if @user == current_user %>motimates" data-id="<%= @user.id %>">
 </div>
-<% if @user == current_user %>
-  <h2>Motimate requests</h2>
-  <div id="motimate-requests">
-    <ul>
-      <% @user.motimate_requests.each do |request| %>
-        <li>
-          <%= link_to request.name.humanize, user_path(request) %>, since <%= request.connections.where(motimate_id: @user.id)[0].created_at %>
-          <%= link_to "accept", accept_path(user_id: current_user, motimate_id: request), method: :post %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-  <h2>Pending requests</h2>
-  <div id="motimates-pending">
-    <ul>
-      <% @user.motimates_pending.each do |pending| %>
-        <li>
-          <%= link_to pending.name.humanize, user_path(pending) %>, since <%= pending.connections.where(motimate_id: @user.id)[0].created_at %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
