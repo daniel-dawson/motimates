@@ -108,6 +108,7 @@ class Connection {
 
       const header = document.createElement("a");
       header.classList.add("header");
+      header.href = connection.motimate.links.profilUrl;
       header.textContent = connection.motimate.attributes.name;
 
       const description = document.createElement("div");
