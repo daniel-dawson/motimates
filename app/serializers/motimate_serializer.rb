@@ -11,4 +11,7 @@ class MotimateSerializer
   attribute :default_avatar_url do |moti|
     gravatar_url_for moti
   end
+  link :profile_url do |moti|
+    "http://localhost:3000/users/#{moti.id}"
+  end
 end
