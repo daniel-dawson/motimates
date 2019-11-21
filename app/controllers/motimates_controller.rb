@@ -7,7 +7,10 @@ class MotimatesController < ApplicationController
     user = User.find_by_id(params[:id])
     user_motimates = user.motimates
     render json: MotimateSerializer.new(user_motimates, {
-      is_collection: true
+      is_collection: true,
+      params: {
+        user_id: user.id
+      }
     })
   end
 end
