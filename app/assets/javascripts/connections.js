@@ -99,9 +99,7 @@ class Connection {
           ? connection.motimate.attributes.defaultAvatarUrl
           : connection.motimate.attributes.avatarUrl;
       img.setAttribute("src", avatar_url);
-      img.classList.add("ui", "rounded", "image");
-
-      debugger;
+      img.classList.add("ui", "middle", "aligned", "rounded", "image");
 
       const contentDiv = document.createElement("div");
       contentDiv.classList.add("middle", "aligned", "content");
