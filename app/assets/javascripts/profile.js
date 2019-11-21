@@ -45,7 +45,13 @@ class Profile {
       header.classList.add("header");
       header.textContent = attrs.name;
       header.href = moti.links.profileUrl;
-      content.append(header);
+
+      const description = document.createElement("div");
+      description.classList.add("description");
+      description.textContent = `motimates since ${moment(
+        attrs.acceptedAt
+      ).fromNow()}`;
+      content.append(header, description);
 
       item.append(avatar, content);
       list.append(item);
