@@ -62,6 +62,7 @@ class Profile {
 
 document.addEventListener("turbolinks:load", () => {
   const motimateList = document.querySelector("div[id$='motimates']");
-
-  Profile.renderMotimates(motimateList);
+  if (motimateList != null) {
+    Profile.renderMotimates(motimateList);
+  }
 });
