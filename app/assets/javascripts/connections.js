@@ -84,7 +84,6 @@ class Connection {
   static updateMotimateList(userJson) {
     const connection = new Connection(userJson);
     const motimateList = document.getElementById("user-motimates");
-
     // motimateList will be null if it does not belong to
     // the current user
     if (motimateList !== null) {
@@ -106,7 +105,7 @@ class Connection {
 
       const header = document.createElement("a");
       header.classList.add("header");
-      header.href = connection.motimate.links.profilUrl;
+      header.href = connection.motimate.links.profileUrl;
       header.textContent = connection.motimate.attributes.name;
 
       const description = document.createElement("div");
