@@ -41,6 +41,9 @@ gem 'gravatar_image_tag'
 gem 'mini_magick', '~> 4.8'
 gem 'image_processing'
 
+# Use omniauth strategy
+gem "omniauth-google-oauth2"
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
